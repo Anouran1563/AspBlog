@@ -1,0 +1,49 @@
+﻿@page
+@model WebApi.Pages.CreatePostPageModel
+@{
+}
+
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Create New Post - Admin</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" asp-for="Title" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Author</label>
+            <input type="text" class="form-control" id="author" asp-for="Author" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            <textarea class="form-control" id="content" asp-for="Content" rows="6"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tags</label>
+            <select class="form-select" asp-for="SelectedTag" asp-items="Model.Tag">
+                <option value="">Select a tag</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Visible</label>
+            <select class="form-select" asp-for="Visible">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+</div>
