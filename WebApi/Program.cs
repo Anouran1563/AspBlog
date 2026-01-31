@@ -24,6 +24,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DBContext>();
+    db.Database.Migrate();
+}
+
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
