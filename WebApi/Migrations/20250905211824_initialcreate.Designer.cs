@@ -11,7 +11,7 @@ using WebApi.Data;
 
 namespace WebApi.Migrations
 {
-    [DbContext(typeof(DBContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20250905211824_initialcreate")]
     partial class initialcreate
     {

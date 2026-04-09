@@ -7,7 +7,7 @@ using WebBlog.Models.Domain;
 
 namespace WebApi.Pages
 {
-    public class AddTagPageModel(DBContext context) : PageModel
+    public class AddTagPageModel(AppDbContext context) : PageModel
     {
         [BindProperty]
         [Required]

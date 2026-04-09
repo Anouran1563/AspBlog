@@ -12,7 +12,7 @@ using WebBlog.Models.Domain;
 
 namespace WebApi.Pages
 {
-    public class CreatePostPageModel(DBContext context) : PageModel
+    public class CreatePostPageModel(AppDbContext context) : PageModel
     {
         [BindProperty]
         [Required]

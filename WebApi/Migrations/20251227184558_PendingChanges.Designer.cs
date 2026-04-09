@@ -11,7 +11,7 @@ using WebApi.Data;
 
 namespace WebApi.Migrations
 {
-    [DbContext(typeof(DBContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20251227184558_PendingChanges")]
     partial class PendingChanges
     {

@@ -1,19 +1,26 @@
 @page
 @model WebApi.Pages.ViewPost
 
-@{
-    Layout = null;
-}
+<h1></h1>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var post in Model.AllPosts)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="post-card" onclick="this.classList.toggle('is-expanded')">
+                    <div class="post-header">
+                        <small>@post.Author</small>
+                        <h3>@post.Title</h3>
+                    </div>
+                    <div class="post-body">
+                        @post.Content
+                    </div>
+                    <div class="post-footer">
+                        @post.Tags
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
-</body>
-</html>
