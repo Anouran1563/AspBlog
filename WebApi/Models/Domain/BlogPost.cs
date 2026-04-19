@@ -1,4 +1,4 @@
-﻿namespace WebBlog.Models.Domain
+﻿namespace WebApi.Models.Domain
 {
     public class BlogPost
     {
@@ -9,7 +9,7 @@
         public DateTime? DoC { get; set; }
         public string? Author { get; set; }
         public bool Visible { get; set; }
-        public ICollection<BlogpostTag>? BlogpostTags { get; set; }
+        public ICollection<BlogpostTag> BlogpostTags { get; set; } = new List<BlogpostTag>();
 
     }
 }

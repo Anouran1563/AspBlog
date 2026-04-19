@@ -1,4 +1,4 @@
-using WebBlog.Models.Domain;
+namespace WebApi.Models.Domain;
 
 public class BlogpostTag
 {

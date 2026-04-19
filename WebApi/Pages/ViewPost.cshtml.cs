@@ -2,38 +2,36 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Models.ViewModels;
-using static WebApi.Data.AppDbContext;
 
 namespace WebApi.Pages;
 
 public class ViewPost : PageModel
 {
-    private readonly DbContext _context;
+    private readonly AppDbContext _context;
 
     public ViewPost(AppDbContext context)
     {
         _context = context;
     }
     public List<PostView> AllPosts { get; set; } = new List<PostView>();
-    public void OnGet()
+    public async Task OnGetAsync()
     {
-        // Hard-coded dummy data to satisfy the UI
-        AllPosts = new List<PostView>
+        var postsFromDb = await _context.BlogPost
+            .Include(p => p.BlogpostTags)
+            .ThenInclude(bt => bt.Tag)
+            .ToListAsync();
+
+        AllPosts = postsFromDb.Select(p => new PostView
         {
-            new PostView 
-            { 
-                Title = "Dummy1", 
-                Author = "System", 
-                Content = "This is temporary content for the git push.",
-                Tags = "Testing Development Dummy" 
-            },
-            new PostView 
-            { 
-                Title = "Dummy2", 
-                Author = "Admin", 
-                Content = "Everything is working if you can see this.",
-                Tags = "CSharp Rider Git" 
-            }
-        };
+            Title = p.Title,
+            Author = p.Author,
+            Content = p.Content,
+            Tags = p.BlogpostTags.Any()
+                ? string.Join(" ",
+                    p.BlogpostTags
+                        .Where(bt => bt.Tag != null)
+                        .Select(bt => bt.Tag!.Name))
+                : string.Empty
+        }).ToList(); 
     }
 }

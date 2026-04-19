@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using WebApi.Data;
-using WebBlog.Models.Domain;
+using WebApi.Models.Domain;
 
 namespace WebApi.Pages
 {

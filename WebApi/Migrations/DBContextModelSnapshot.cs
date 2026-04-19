@@ -17,27 +17,12 @@ namespace WebApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.8")
+                .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BlogpostTag", b =>
-                {
-                    b.Property<Guid>("BlogpostId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TagId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("BlogpostId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("BlogPostTags");
-                });
-
-            modelBuilder.Entity("WebBlog.Models.Domain.BlogPost", b =>
+            modelBuilder.Entity("WebApi.Models.Domain.BlogPost", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,7 +51,22 @@ namespace WebApi.Migrations
                     b.ToTable("BlogPost");
                 });
 
-            modelBuilder.Entity("WebBlog.Models.Domain.Tag", b =>
+            modelBuilder.Entity("WebApi.Models.Domain.BlogpostTag", b =>
+                {
+                    b.Property<Guid>("BlogpostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BlogpostId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("BlogPostTags");
+                });
+
+            modelBuilder.Entity("WebApi.Models.Domain.Tag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,6 +76,7 @@ namespace WebApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -83,15 +84,15 @@ namespace WebApi.Migrations
                     b.ToTable("Tag");
                 });
 
-            modelBuilder.Entity("BlogpostTag", b =>
+            modelBuilder.Entity("WebApi.Models.Domain.BlogpostTag", b =>
                 {
-                    b.HasOne("WebBlog.Models.Domain.BlogPost", "Blogpost")
+                    b.HasOne("WebApi.Models.Domain.BlogPost", "Blogpost")
                         .WithMany("BlogpostTags")
                         .HasForeignKey("BlogpostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebBlog.Models.Domain.Tag", "Tag")
+                    b.HasOne("WebApi.Models.Domain.Tag", "Tag")
                         .WithMany("BlogpostTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -102,12 +103,12 @@ namespace WebApi.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("WebBlog.Models.Domain.BlogPost", b =>
+            modelBuilder.Entity("WebApi.Models.Domain.BlogPost", b =>
                 {
                     b.Navigation("BlogpostTags");
                 });
 
-            modelBuilder.Entity("WebBlog.Models.Domain.Tag", b =>
+            modelBuilder.Entity("WebApi.Models.Domain.Tag", b =>
                 {
                     b.Navigation("BlogpostTags");
                 });
